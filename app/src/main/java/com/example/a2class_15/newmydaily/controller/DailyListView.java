@@ -23,8 +23,7 @@ import java.util.ArrayList;
 
 public class DailyListView extends AppCompatActivity{
     ListView listView;
-    public static DailyListAdapter dailyListAdapter=new DailyListAdapter();
-
+    public static DailyListAdapter dailyListAdapter;
     public static DBManager myDBHelper;
 
     FloatingActionButton fabtn;
@@ -70,7 +69,7 @@ public class DailyListView extends AppCompatActivity{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         myDBHelper.Delete(tempDailyItem.getNum());
-                        dailyListAdapter.deleteItem(tempDailyItem);
+                        dailyListAdapter.deleteItem(tempDailyItem.getNum());
                     }
                 });
                 builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
@@ -94,6 +93,14 @@ public class DailyListView extends AppCompatActivity{
                 startActivity(it);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        dailyListAdapter.clearItem();
+
+        LoadAllSelect();
     }
 
     //FLAG_ACTIVITY_SINGLE_TOP의 코드로 인해 전달받은 인텐트의 부가데이터를 이용할때 호출

@@ -12,12 +12,13 @@ import com.example.a2class_15.newmydaily.R;
 import com.example.a2class_15.newmydaily.vo.DailyListItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class DailyListAdapter extends BaseAdapter {
-    private ArrayList<DailyListItem> dailyListItems;
+public class DailyListAdapter extends BaseAdapter{
+    private List<DailyListItem> dailyListItems;
 
     public DailyListAdapter(){
-        dailyListItems = new ArrayList<DailyListItem>();
+
     }
 
     @Override
@@ -39,9 +40,11 @@ public class DailyListAdapter extends BaseAdapter {
         return convertView;
     }
 
+
     public void addItem(DailyListItem dailyListItem){
         dailyListItems.add(dailyListItem);
     }
+
 
     public void updateItem(DailyListItem dailyListItem){
         DailyListItem temp;
@@ -57,13 +60,13 @@ public class DailyListAdapter extends BaseAdapter {
         }
     }
 
-    public void deleteItem(DailyListItem dailyListItem){
+
+    public void deleteItem(String num){
         DailyListItem temp;
         for(int i=0;i<getCount();i++){
             temp =dailyListItems.get(i);
             Log.d("temp",temp.toString());
-            Log.d("updateDailyListItem",dailyListItem.toString());
-            if(temp.getNum().equals(dailyListItem.getNum())){
+            if(temp.getNum().equals(num)){
                 dailyListItems.remove(i);
                 notifyDataSetChanged();
             }
@@ -72,11 +75,11 @@ public class DailyListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return dailyListItems.size();
+        return (dailyListItems!=null)?dailyListItems.size():0;
     }
 
     @Override
-    public Object getItem(int position) {
+    public DailyListItem getItem(int position) {
         return dailyListItems.get(position);
     }
 
@@ -84,4 +87,13 @@ public class DailyListAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+
+
+    public void clearItem(){
+        if(dailyListItems!=null){
+            dailyListItems.clear();
+        }
+    }
+
+
 }

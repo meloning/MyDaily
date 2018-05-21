@@ -50,7 +50,7 @@ public class DailyDetailView extends AppCompatActivity implements DataSettable{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         DailyListView.myDBHelper.Delete(dailyListItem.getNum());//setDailyView()를 통해 객체 할당받음.
-                        DailyListView.dailyListAdapter.deleteItem(dailyListItem);
+                        DailyListView.dailyListAdapter.deleteItem(dailyListItem.getNum());
                         finish();
                     }
                 });
